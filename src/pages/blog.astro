@@ -1,8 +1,9 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 // will asynchronously loads all md post files
-const allPosts = await Astro.glob("../pages/posts/*.md");
+const allPosts = await getCollection("posts");
 const pageTitle = "My astro learning blog!";
 ---
 
@@ -12,7 +13,7 @@ const pageTitle = "My astro learning blog!";
     {
       allPosts.map((post) => (
         <li>
-          <a href={post.url}>{post.frontmatter.title}</a>
+          <a href={`/posts/${post.slug}`}>{post.data.title}</a>
         </li>
       ))
     }
