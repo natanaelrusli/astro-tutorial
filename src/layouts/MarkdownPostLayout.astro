@@ -1,10 +1,17 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import { fade, slide } from "astro:transitions";
+
 const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
-  <p>{frontmatter.pubDate.toString().slice(0, 10)}</p>
+  <p transition:animate={slide({ duration: "1s" })}>
+    {frontmatter.pubDate.toString().slice(0, 10)}
+  </p>
+  <p transition:animate={fade({ duration: "2s" })}>
+    <em>{frontmatter.description}</em>
+  </p>
   <img
     src={frontmatter.image?.url || "https://docs.astro.build/assets/rays.webp"}
     alt={frontmatter.image?.alt || "no image"}
